@@ -95,73 +95,68 @@
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
-	.vs { height:500px; }
-	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
-	#page1 .page_wrap { width: 800px; }
-	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
-	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
-    td { padding-top:10px; padding-bottom: 10px; }
-    .lb { display:block;  font-size:20px; }
-	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
-         text-align: center; padding:10px 20px;  cursor:pointer; }
-    .btn-primary { background: #333; color:#fff; }
-    .btn-cancel { background: crimson; color:#fff; }
-    .page_tit { text-align:center; font-size:32px; }
-    .vs { height:auto; }
-    .title {line-height:10vh; }
-    .page { height: 50vh; }
+    .btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
+        text-align: center; padding:10px 20px;  cursor:pointer; }
+	.btn-primary { background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%); 
+       background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%); 
+       background: linear-gradient(to bottom, #00b7ea 0%,#009ec3 100%); color:#fff; }
+	.btn-cancle { background: -moz-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%); 
+       background: -webkit-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); 
+       background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
+       color:#fff;
+   }
 	</style>
 </head>
 <body>
     <div class="container">
 <%@ include file="./hd.jsp" %>
-        <div class="content">
+        <div class="join_content">
             <section class="page">
-				<h1 class="title">MY PAGE</h1>
+				<h1 class="join_tit">회원 정보 페이지</h1>
             	<div class="page_wrap">
 					<form name="join_form" action="join_pro.jsp" method="post">
 						<table>
 							<tbody>
 								<tr>
-									<th>아이디</th>
-									<td><%=mid %></td>
+									<th><label for="id" class="lb">아이디</label></th>
+									<td><input type="text" name="id" id="id" value="<%=mid %>" readonly></td>
 								</tr>
 								<tr>
-									<th>비밀번호</th>
-									<td><%=mpw %></td>
+									<th><label for="pw" class="lb">비밀번호</label></th>
+									<td><input type="password" name="pw" id="pw" value="<%=mpw %>" required></td>
 								</tr>
 								<tr>
-									<th>이름</th>
-									<td><%=mpw %></td>
+									<th><label for="name" class="lb">이름</label></th>
+									<td><input type="text" name="name" id="name" value="<%=mpw %>" required></td>
 								</tr>
 								<tr>
-									<th>전화번호</th>
-									<td><%=mpw %></td>
+									<th><label for="tel" class="lb">전화번호</label></th>
+									<td><input type="tel" name="tel" id="tel" value="<%=mpw %>" required></td>
 								</tr>
 								<tr>
-									<th>생년월일(yyyymmdd)</th>
-									<td><%=mborn_at %></td>
+									<th><label for="born_at" class="lb">생년월일(yyyymmdd)</label></th>
+									<td><input type="text" name="born_at" id="born_at" value="<%=mborn_at %>" required></td>
 								</tr>
 								<tr>
-									<th>이메일</th>
-									<td><%=memail %></td>
+									<th><label for="email" class="lb">이메일</label></th>
+									<td><input type="email" name="email" id="email" value="<%=memail %>" required></td>
 								</tr>
 								<tr>
-									<th>주소</th>
-									<td><%=maddr %></td>
+									<th><label for="addr" class="lb">주소</label></th>
+									<td><input type="text" name="addr" id="addr" value="<%=maddr %>" required></td>
 								</tr>
 								<tr>
-									<th>포인트</th>
-									<td><%=mpoint %></td>
+									<th><label for="point" class="lb">포인트</label></th>
+									<td><input type="text" name="point" id="point"  value="<%=mpoint %>" readonly></td>
 								</tr>
 								<tr>
-									<th>가입일</th>
-									<td><%=mregdate %></td>
+									<th><label for="regdate" class="lb">가입일</label></th>
+									<td><input type="text" name="regdate" id="regdate"  value="<%=mregdate %>" readonly></td>
 								</tr>
 								<tr>
-									<td colspan="2">
-										<a href="member_modify.jsp?id=<%=mid %>" class="btn btn-primary">정보수정</a>
-										<a href="member_del_pro.jsp?id=<%=mid %>" class="btn btn-cancel">회원탈퇴</a>
+									<td>
+										<input type="submit" value="회원가입수정" class="btn btn-primary"> &nbsp; &nbsp; &nbsp; &nbsp;
+										<a href="mypage.jsp?id=<%=mid %>" class="btn btn-primary">마이 페이지로 되돌아가기</a>
 									</td>
 								</tr>
 							</tbody>

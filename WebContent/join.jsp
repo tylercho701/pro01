@@ -40,6 +40,21 @@
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
+	.vs { height:500px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	#page1 .page_wrap { width: 800px; }
+	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
+	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+    td { padding-top:10px; padding-bottom: 10px; }
+    .lb { display:block;  font-size:20px; }
+	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
+         text-align: center; padding:10px 20px;  cursor:pointer; }
+    .btn-primary { background: #333; color:#fff; }
+    .btn-cancel { background: crimson; color:#fff; }
+    .page_tit { text-align:center; font-size:32px; }
+    .vs { height:auto; }
+    .title {line-height:10vh; }
+    .page { height: 50vh; }
 	</style>
 </head>
 <body>
@@ -89,8 +104,8 @@
 								</tr>
 								<tr>
 									<td>
-										<input type="submit" value="회원가입" onclick="form_check(this)"> &nbsp; &nbsp; &nbsp; &nbsp;
-										<input type="reset" value="취소">
+										<input type="submit" value="회원가입" onclick="form_check(this)" class="btn btn-primary"> &nbsp; &nbsp; &nbsp; &nbsp;
+										<input type="reset" value="취소" class="btn btn-cancel" onclick="itit()">
 									</td>
 								</tr>
 							</tbody>
@@ -117,6 +132,12 @@
                     		return false;
                     	}
 					}
+					function init(){
+                    	var form = document.getElementById("join_form");
+                    	var id = document.getElementById("id");
+                    	id.removeAttribute("readonly");
+                    	form.reset();
+                    }
 					</script>
 				</div>
 			</section>

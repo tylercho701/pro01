@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	String path = request.getContextPath();
+	String path_login = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -42,21 +42,18 @@
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
-	.table { width:900px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
+	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
 	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
     td { padding-top:10px; padding-bottom: 10px; }
     .lb { display:block;  font-size:20px; }
 	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
          text-align: center; padding:10px 20px;  cursor:pointer; }
-    .btn-primary { background: -moz-linear-gradient(top, #00b7ea 0%, #009ec3 100%); 
-        background: -webkit-linear-gradient(top, #00b7ea 0%,#009ec3 100%); 
-        background: linear-gradient(to bottom, #00b7ea 0%,#009ec3 100%); color:#fff; }
-    .btn-cancle { background: -moz-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%); 
-        background: -webkit-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%); 
-        background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
-        color:#fff;
-    }
+    .btn-primary { background: #333; color:#fff; }
+    .btn-cancel { background: crimson; color:#fff; }
     .page_tit { text-align:center; font-size:32px; }
+    .vs { height:auto; }
+    .title {line-height:10vh; }
+    .page { height: 50vh; }
 	</style>
 </head>
 <body>
@@ -65,14 +62,14 @@
         <div class="content">
             <figure class="vs">
                 <div class="img_box">
-                    <img src="<%=path %>/images/main_brand.png" alt="main_image_nongshim">
+                    <h1 class="title">LOG IN</h1>
                 </div>
             </figure>
             <section class="page">
                 <h1 class="page_title">로그인</h1>
             	<div class="page_wrap">
-					<form action="login_pro.jsp" method="post">
-						<table class="table">
+					<form action="login_pro.jsp" method="post" name="login_form">
+						<table class="table" id="tb1">
 							<tbody>
 								<tr>
 									<th><label for="id">아이디</label></th>

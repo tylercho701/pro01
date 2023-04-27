@@ -123,6 +123,7 @@ background-size:120% auto; background-position:center top;
 .vs { margin: 0; padding: 0; clear:both; width: 100vw; height:50vh; }
 .tit { text-align: center; line-height: 40vh; color:#fff;
 font-size:50px; text-shadow:1px 1px 30px #333; }
+.title { text-align: center; line-height: 40vh; font-size:50px; }
 .page { clear: both; width: 100vw; height: 100vh; position:relative; 
 border-bottom:1px solid #f1f1f1; }
 .page_tit { text-align: center;  padding-top:190px; font-size:60px; 

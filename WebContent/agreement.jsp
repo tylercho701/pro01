@@ -40,13 +40,33 @@
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
+	.vs { height:500px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	#page1 .page_wrap { width: 800px; }
+	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
+	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+    td { padding-top:10px; padding-bottom: 10px; }
+    .lb { display:block;  font-size:20px; }
+	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
+         text-align: center; padding:10px 20px;  cursor:pointer; }
+    .btn-primary { background: #333; color:#fff; }
+    .btn-cancel { background: crimson; color:#fff; }
+    .page_tit { text-align:center; font-size:32px; }
+    .vs { height:auto; }
+    .title {line-height:10vh; }
+    .page { height: 50vh; }
+    textarea { width:1000px; margin:20px auto; }
+   	textarea { display:block; width:820px; margin:5px auto; padding:24px;
+   	color:#999; }
+   	.btn_fr { text-align:center; min-height:80px; width:1000px; margin:8px auto; 
+   	font-size:20px; }
 	</style>
 </head>
 <body>
     <div class="container">
 <%@ include file="./hd.jsp" %>
-        <div class="agrmt_content">
-        	<h1 class="agrmt_tit">이용약관</h1>
+        <div class="content">
+        	<h1 class="title">이용약관</h1>
             <textarea rows="30" cols="100" readonly>
 			            제1조 (목적)
 				이 약관은 ㈜농심(이하 "회사" 라 합니다)에서 운영하는 웹사이트(Web Site)에서 제공하는 서비스(이하 "서비스" 라 합니다)의 이용조건 및 절차에 관한 사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -168,7 +188,7 @@
             	<input type="checkbox" id="agr_item1">
             	<label for="agr_item1">이용 약관 동의</label>
             </div>
-            <h1 class="agrmt_tit">개인 정보 이용 동의</h1>
+            <h1 class="title">개인 정보 이용 동의</h1>
             <textarea rows="30" cols="100" readonly>
 				■ 수집하는 개인정보 항목
 				회사는 회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
@@ -219,7 +239,7 @@
             	<input type="checkbox" id="agr_item2">
             	<label for="agr_item2">개인 정보 이용 약관 동의</label>
             	<br><br><br><br>
-            	<input type="button" id="agreed" value="다음으로">
+            	<input type="button" id="agreed" value="다음으로" class="btn btn-primary" >
             </div>
 		</div>
 		<script>
