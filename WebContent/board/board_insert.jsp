@@ -1,72 +1,66 @@
+<%@ page import="java.sql.DriverManager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
-<% 
+<%
+	String path_ist = request.getContextPath();
+	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
-	
+
+	String iid = "";
+	if(session.getAttribute("id")!=null){
+		iid = (String) session.getAttribute("id");
+	}
+
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro01";
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = (String) session.getAttribute("id");
-	String mpw = "";
-	String mname = "";
-	String mtel = "";
-	int mborn = 0;
-	String maddr = "";
-	String memail = "";
-	int mpoint = 0;
-	String mregdate = "";
-	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
+
 	String sql = "";
+	
+	String aiid = request.getParameter("id");
+	String ibtit = request.getParameter("btit");
+	String ibbod = request.getParameter("bbody");
+	
+	int i = 0;
 	
 	try {
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member where id=?";
+			sql = "insert into board values(default, ?, ?, ?, default)";
 			try {
-				pstmt = conn.prepareStatement(sql);	
-				pstmt.setString(1, mid);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					mid = rs.getString("id");
-					mpw = rs.getString("pw");
-					mname = rs.getString("mname");
-					mtel = rs.getString("mtel");
-					mborn = Integer.parseInt(rs.getString("mborn"));
-					maddr = rs.getString("maddr");
-					memail = rs.getString("memail");
-					mpoint = Integer.parseInt(rs.getString("point"));
-					mregdate = rs.getString("regdate");
-				} 
-				rs.close();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, ibtit);
+				pstmt.setString(2, ibbod);
+				pstmt.setString(3, aiid);
+				
 				pstmt.close();
 				conn.close();
 			} catch(SQLException e) {
 				System.out.println("SQL 구문 전송 실패");
 			}
 		} catch(SQLException e) {
-			System.out.println("DB 접속 실패");
+		System.out.println("DB 접속 실패");
 		}
 	} catch(ClassNotFoundException e) {
-		System.out.println("driver 로드 실패");
+	System.out.println("driver 로드 실패");
 	}
+%>
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MY PAGE</title>
+    <title>BOARD</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -91,16 +85,16 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="<%=path_ist %>/common.css">
+    <link rel="stylesheet" href="<%=path_ist %>/main.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
-	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
-	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+	.table { width:800px; margin:0 auto; padding-top:20px; border-top:2px solid #333; text-align:center; }
+	th {  text-align: center;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
     td { padding-top:10px; padding-bottom: 10px; }
     .lb { display:block;  font-size:20px; }
 	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
@@ -115,61 +109,39 @@
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="../hd.jsp" %>
         <div class="content">
-            <section class="page">
-				<h1 class="title">MY PAGE</h1>
-            	<div class="page_wrap">
-					<table>
-						<tbody>
-							<tr>
-								<th>아이디</th>
-								<td><%=mid %></td>
-							</tr>
-							<tr>
-								<th>비밀번호</th>
-								<td><%=mpw %></td>
-							</tr>
-							<tr>
-								<th>이름</th>
-								<td><%=mname %></td>
-							</tr>
-							<tr>
-								<th>전화번호</th>
-								<td><%=mtel %></td>
-							</tr>
-							<tr>
-								<th>생년월일(yyyymmdd)</th>
-								<td><%=mborn %></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td><%=memail %></td>
-							</tr>
-							<tr>
-								<th>주소</th>
-								<td><%=maddr %></td>
-							</tr>
-							<tr>
-								<th>가입일</th>
-								<td><%=mregdate %></td>
-							</tr>
-							<tr>
-								<th>포인트</th>
-								<td><%=mpoint %></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<a href="mypage_modify.jsp?id=<%=mid %>" class="btn btn-primary">정보수정</a>
-									<a href="member_del_pro.jsp?id=<%=mid %>" class="btn btn-cancel">회원탈퇴</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+            <figure class="vs">
+                <div class="img_box">
+                </div>
+            </figure>
+		     <section class="page" id="page3">
+				<h2 class="page_title">농심소식</h2>
+				<div class="page_wrap">
+					<form name="insert_form" action="boardInsert_pro.jsp" method="post">
+						<table class="table">
+							<tbody>
+								<tr>
+									<th><label for="btit" class="lb">Title</label></th>
+									<td><input type="text" name="btit" id="btit" required></td>
+								</tr>
+								<tr>
+									<th><label for="bbody" class="lb">Content</label></th>
+									<td><textarea name="bbody" id="bbody" cols=30 rows=5></textarea></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="submit" value="글 등록" class="btn btn-primary"> &nbsp; &nbsp; &nbsp; &nbsp;
+										<input type="reset" value="취소" class="btn btn-cancel">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
 				</div>
 			</section>
 		</div>
-<%@ include file="./ft.jsp" %>
+<%@ include file="../ft.jsp" %> 
 	</div>
 </body>
 <!-- 

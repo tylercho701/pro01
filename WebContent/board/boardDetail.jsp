@@ -1,72 +1,49 @@
+<%@ page import="java.sql.DriverManager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
-<% 
+<%
+	String path_adv = request.getContextPath();
+	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
+
+	String did = "";
+	if(session.getAttribute("id")!=null){
+		did = (String) session.getAttribute("id");
+	}
 	
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro01";
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = (String) session.getAttribute("id");
-	String mpw = "";
-	String mname = "";
-	String mtel = "";
-	int mborn = 0;
-	String maddr = "";
-	String memail = "";
-	int mpoint = 0;
-	String mregdate = "";
-	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
 	String sql = "";
+	
+	int dbnum = Integer.parseInt(request.getParameter("bnum"));
+	String ckId = "";
 	
 	try {
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member where id=?";
+			sql = "select a.bnum as bnum, a.btitle as title, a.bbody as bbody, a.written_at as written_at, b.mname as written_by from board a inner join member b on a.written_by = b.id where bnum = ?";
 			try {
-				pstmt = conn.prepareStatement(sql);	
-				pstmt.setString(1, mid);
-				rs = pstmt.executeQuery();
-				if(rs.next()){
-					mid = rs.getString("id");
-					mpw = rs.getString("pw");
-					mname = rs.getString("mname");
-					mtel = rs.getString("mtel");
-					mborn = Integer.parseInt(rs.getString("mborn"));
-					maddr = rs.getString("maddr");
-					memail = rs.getString("memail");
-					mpoint = Integer.parseInt(rs.getString("point"));
-					mregdate = rs.getString("regdate");
-				} 
-				rs.close();
-				pstmt.close();
-				conn.close();
-			} catch(SQLException e) {
-				System.out.println("SQL 구문 전송 실패");
-			}
-		} catch(SQLException e) {
-			System.out.println("DB 접속 실패");
-		}
-	} catch(ClassNotFoundException e) {
-		System.out.println("driver 로드 실패");
-	}
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, dbnum);
+				rs = pstmt.executeQuery();	
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MY PAGE</title>
+    <title>BOARD</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -91,16 +68,16 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="<%=path_adv %>/common.css">
+    <link rel="stylesheet" href="<%=path_adv %>/main.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
-	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; margin-right:80px; }
 	#page1 .page_wrap { width: 800px; }
-	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
-	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+	.table { width:800px; margin:0 auto; padding-top:20px; border-top:2px solid #333; text-align:center; }
+	th {  text-align: center;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
     td { padding-top:10px; padding-bottom: 10px; }
     .lb { display:block;  font-size:20px; }
 	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
@@ -110,68 +87,82 @@
     .page_tit { text-align:center; font-size:32px; }
     .vs { height:auto; }
     .title {line-height:10vh; }
-    .page { height: 80vh; }
+    .page { height: 70vh; }
 	</style>
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="../hd.jsp" %>
         <div class="content">
-            <section class="page">
-				<h1 class="title">MY PAGE</h1>
-            	<div class="page_wrap">
-					<table>
+            <figure class="vs">
+                <div class="img_box">
+                </div>
+            </figure>
+			<section class="page" id="page3">
+				<h2 class="page_title">자세히보기</h2>
+				<div class="page_wrap">
+					<table class="table">
 						<tbody>
+<%
+	if(rs.next()){
+%>	
 							<tr>
-								<th>아이디</th>
-								<td><%=mid %></td>
+								<th>board_num</th>
+								<td><%=rs.getInt("bnum") %></td>
 							</tr>
 							<tr>
-								<th>비밀번호</th>
-								<td><%=mpw %></td>
+								<th>board_tit</th>
+								<td><%=rs.getString("title") %></td>
 							</tr>
 							<tr>
-								<th>이름</th>
-								<td><%=mname %></td>
+								<th>content</th>
+								<td><%=rs.getString("bbody") %></td>
 							</tr>
 							<tr>
-								<th>전화번호</th>
-								<td><%=mtel %></td>
+								<th>written_at</th>
+								<td><%=rs.getString("written_at") %></td>
 							</tr>
 							<tr>
-								<th>생년월일(yyyymmdd)</th>
-								<td><%=mborn %></td>
+								<th>written_by</th>
+								<td><%=rs.getString("written_by") %></td>
 							</tr>
+<%
+	}
+%>
 							<tr>
-								<th>이메일</th>
-								<td><%=memail %></td>
-							</tr>
-							<tr>
-								<th>주소</th>
-								<td><%=maddr %></td>
-							</tr>
-							<tr>
-								<th>가입일</th>
-								<td><%=mregdate %></td>
-							</tr>
-							<tr>
-								<th>포인트</th>
-								<td><%=mpoint %></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<a href="mypage_modify.jsp?id=<%=mid %>" class="btn btn-primary">정보수정</a>
-									<a href="member_del_pro.jsp?id=<%=mid %>" class="btn btn-cancel">회원탈퇴</a>
-								</td>
-							</tr>
+							<td colspan="2">
+								<a href="<%=path_adv %>/board/advert.jsp#page3" class="btn btn-primary">글 목록</a>
+<%
+	if(did.equals("admin")){
+%>
+								<a href="<%=path_adv %>/board/boardUpdate.jsp?bnum=<%=dbnum %>" class="btn btn-primary">글 수정</a>								
+								<a href="<%=path_adv %>/board/boardDel_pro.jsp?bnum=<%=dbnum %>" class="btn btn-cancel">삭제</a>
+<%
+	}
+%>
+							</td>
 						</tbody>
 					</table>
 				</div>
 			</section>
 		</div>
-<%@ include file="./ft.jsp" %>
+<%@ include file="../ft.jsp" %> 
 	</div>
 </body>
+<%
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				System.out.println("SQL 구문 전송 실패");
+			}
+		} catch(SQLException e) {
+		System.out.println("DB 접속 실패");
+		}
+	} catch(ClassNotFoundException e) {
+	System.out.println("driver 로드 실패");
+	}
+%>
 <!-- 
 <h1>농심</h1>
 <a href="https://tylercho701.github.io">메인</a> 

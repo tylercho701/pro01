@@ -10,17 +10,10 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = request.getParameter("id");
-	String mpw = request.getParameter("pw");
-	String mname = request.getParameter("name");
-	String mtel = request.getParameter("tel");
-	int mborn = Integer.parseInt(request.getParameter("born"));
-	String maddr = request.getParameter("addr");
-	String memail = request.getParameter("email");
-		
+	String id = request.getParameter("id");
+	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
-	
 	int i = 0;
 	
 	String sql = "";
@@ -29,26 +22,17 @@
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "update member set pw=?, name = ?, tel = ?, born_at = ?, addr = ?, email = ? where id = ?";
+			sql = "delete from member where id=?";
 			try {
-				pstmt = conn.prepareStatement(sql);	
-				
-				pstmt.setString(1, mpw);
-				pstmt.setString(2, mname);
-				pstmt.setString(3, mtel);
-				pstmt.setInt(4, mborn);
-				pstmt.setString(5, maddr);
-				pstmt.setString(6, memail);
-				pstmt.setString(7, mid);
-				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);				
 				i = pstmt.executeUpdate();
-								
-				if(i>0){
-					response.sendRedirect("mypage.jsp?id="+mid);
-				} else {
-					response.sendRedirect("member_modify.jsp?id="+mid);
-				}
 				
+				if(i>0){
+					response.sendRedirect("logout.jsp");
+				} else {
+					response.sendRedirect("mypage.jsp?id="+id);
+				}
 				pstmt.close();
 				conn.close();
 			} catch(SQLException e) {

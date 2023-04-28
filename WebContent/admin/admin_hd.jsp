@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%
-	String path_hd = request.getContextPath();
+	String path_adm_hd = request.getContextPath();
 
 	String id = "";
 	if(session.getAttribute("id")!=null) {
@@ -15,28 +15,11 @@
 <%
 	if(id.equals("admin")) {
 %>
-				<li><a href="<%=path_hd %>/admin/admin_index.jsp">관리자</a></li>
-				<li><a href="<%=path_hd %>/logout.jsp">로그아웃</a></li>
+				<li><a href="<%=path_adm_hd %>/admin.jsp">관리자</a></li>
+				<li><a href="<%=path_adm_hd %>/logout.jsp">로그아웃</a></li>
 <%
 	}
 %>
-<% 
-	if(!(id.equals("")) && !(id.equals("admin"))) { 
-%>
-				<li><a href="<%=path_hd %>/mypage.jsp">마이페이지</a></li>
-				<li><a href="<%=path_hd %>/logout.jsp">로그아웃</a></li>
-<% 
-	} 
-%>
-<% 
-	if((id.equals(""))){ 
-%>
-				<li><a href="<%=path_hd %>/login.jsp">로그인</a></li>
-                <li><a href="<%=path_hd %>/agreement.jsp">회원가입</a></li>
-<% 
-	} 
-%>
-                
             </ul>
             <ul class="right_tnb">
                 <li><a href="https://blog.naver.com/nongshimblog" class="sns1">NAVER BLOG</a></li>
@@ -47,58 +30,36 @@
     </nav>
     <div class="main">
         <div class="main_wrap">
-            <a href="<%=path_hd %>/index.jsp" class="logo"><img src="<%=path_hd %>/images/pop-logo.jpg" alt="">NongShimlogo</a>
+            <a href="<%=path_adm_hd %>/index.jsp" class="logo"><img src="<%=path_adm_hd %>/images/pop-logo.jpg" alt="">NongShimlogo</a>
             <nav class="gnb">
                 <ul class="gnb_fr">
-                    <li><a href="<%=path_hd %>/intro.jsp">농심소개</a>
+                    <li><a href="<%=path_adm_hd %>/intro.jsp">농심소개</a>
                         <div class="sub item1">
                             <ul class="dp2">
-                                <li><a href="<%=path_hd %>/intro.jsp#page1">농심소개</a></li>
-                                <li><a href="<%=path_hd %>/intro.jsp#page2">경영이념</a></li>
-                                <li><a href="<%=path_hd %>/intro.jsp#page3">연혁</a></li>
-                                <li><a href="<%=path_hd %>/intro.jsp#page4">세계속의 농심</a></li>
-                                <li><a href="<%=path_hd %>/intro.jsp#page5">오시는길</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="<%=path_hd %>/prosperity.jsp">지속가능경영</a>
+                    <li><a href="<%=path_adm_hd %>/prosperity.jsp">지속가능경영</a>
                         <div class="sub item2">
                             <ul class="dp2">
-                                <li><a href="<%=path_hd %>/prosperity.jsp#page1">OVERVIEW</a></li>
-                                <li><a href="<%=path_hd %>/prosperity.jsp#page2">PLANET</a></li>
-                                <li><a href="<%=path_hd %>/prosperity.jsp#page3">PEOPLE</a></li>
-                                <li><a href="<%=path_hd %>/prosperity.jsp#page4">PROSPERITY</a></li>
-                                <li><a href="<%=path_hd %>/prosperity.jsp#page5">지속가능경영보고서</a></li>
-                            </ul>
+                           </ul>
                         </div>
                     </li>
-                    <li><a href="<%=path_hd %>/board/advert.jsp">홍보센터</a>
+                    <li><a href="<%=path_adm_hd %>/board/advert.jsp">홍보센터</a>
                         <div class="sub item3">
                             <ul class="dp2">
-                                <li><a href="<%=path_hd %>/board/advert.jsp#page1">OVERVIEW</a></li>
-                                <li><a href="<%=path_hd %>/board/advert.jsp#page2">농시미서포트</a></li>
-                                <li><a href="<%=path_hd %>/board/advert.jsp#page3">농심 소식</a></li>
-                                <li><a href="<%=path_hd %>/board/advert.jsp#page4">농심 TV</a></li>
-                                <li><a href="<%=path_hd %>/board/advert.jsp#page5">라면피디아</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="<%=path_hd %>/invest.jsp">투자정보</a>
+                    <li><a href="<%=path_adm_hd %>/invest.jsp">투자정보</a>
                         <div class="sub item4">
                             <ul class="dp2">
-                                <li><a href="<%=path_hd %>/invest.jsp#page1">주식에 관한 사항</a></li>
-                                <li><a href="<%=path_hd %>/invest.jsp#page2">주가정보</a></li>
-                                <li><a href="<%=path_hd %>/invest.jsp#page3">IR 정보</a></li>
-                                <li><a href="<%=path_hd %>/invest.jsp#page">공시정보</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li><a href="<%=path_hd %>/cs.jsp">고객서비스</a>
+                    <li><a href="<%=path_adm_hd %>/cs.jsp">고객서비스</a>
                         <div class="sub item5">
                             <ul class="dp2">
-                                <li><a href="<%=path_hd %>/cs.jsp#page1">OVERVIEW</a></li>
-                                <li><a href="<%=path_hd %>/cs.jsp#page2">고객센터</a></li>
-                                <li><a href="<%=path_hd %>/cs.jsp#page2">공장견학</a></li>
                             </ul>
                         </div>
                     </li>
