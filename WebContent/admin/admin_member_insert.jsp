@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>LOG IN</title>
+    <title>ADMIN_INSERT_MEMBER</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -59,12 +59,12 @@
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="./admin_hd.jsp" %>
         <div class="join_content">
             <section class="page">
-				<h1 class="join_tit">회원가입</h1>
+				<h1 class="join_tit">관리자용 회원 추가</h1>
             	<div class="page_wrap">
-					<form name="join_form" action="join_pro.jsp" method="post">
+					<form name="admin_insert_form" action="admin_insert_pro.jsp" method="post">
 						<table>
 							<tbody>
 								<tr>
@@ -103,6 +103,10 @@
 									<td><input type="email" name="email" id="email"></td>
 								</tr>
 								<tr>
+									<th><label for="point">포인트</label></th>
+									<td><input type="point" name="point" id="point"></td>
+								</tr>
+								<tr>
 									<td>
 										<input type="submit" value="회원가입" onclick="form_check(this)" class="btn btn-primary"> &nbsp; &nbsp; &nbsp; &nbsp;
 										<input type="reset" value="취소" class="btn btn-cancel" onclick="itit()">
@@ -115,7 +119,7 @@
 					function idCheck(){
                     	var id = document.getElementById("id");
                     	if(id.value!=""){
-                    		window.open("idCheck.jsp?id="+id.value,"아이디 중복 검사","width=400, height=300");
+                    		window.open("admin_idCheck.jsp?id="+id.value,"아이디 중복 검사","width=400, height=300");
                     	} else {
                     		alert("아이디를 확인하세요");
                     		id.focus();
@@ -133,7 +137,7 @@
                     	}
 					}
 					function init(){
-                    	var form = document.getElementById("join_form");
+                    	var form = document.getElementById("admin_insert_form");
                     	var id = document.getElementById("id");
                     	id.removeAttribute("readonly");
                     	form.reset();
@@ -142,7 +146,7 @@
 				</div>
 			</section>
 		</div>
-<%@ include file="./ft.jsp" %>
+<%@ include file="../ft.jsp" %>
 	</div>
 </body>
 <!-- 

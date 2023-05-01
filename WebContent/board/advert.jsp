@@ -145,13 +145,32 @@
 <%
 					if(aid!=""){
 %>
-								<td><a href="board_insert.jsp?id?<%=aid %>" class="btn btn-primary" >글쓰기</a></td>
+								<td><a href="boardInsert.jsp?id?<%=aid %>" class="btn btn-primary" >글쓰기</a></td>
 <%
 					}
 %>
 							</tr>
 						</tbody>
 					</table>
+					<div>
+<%
+							if(pid!=""){
+%>						
+						<a href="<%=path_adv %>/board/boardInsert.jsp" class="btn btn-primary">글 쓰기</a>
+<%
+							} else {
+%>
+						<h3 class="data">로그인 후에 글쓰기가 가능합니다.</h3>
+<%
+							}
+%>
+					</div>
+				</div>
+				<script>
+				$(document).ready(function(){
+				    $('#tb1').DataTable({'order': [[0, 'desc']]});
+				});
+				</script>
 				</div>
 			</section>
 			<section class="page" id="page4">

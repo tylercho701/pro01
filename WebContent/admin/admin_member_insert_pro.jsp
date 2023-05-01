@@ -10,13 +10,14 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	String name = request.getParameter("name");
-	String tel = request.getParameter("tel");
-	int born = Integer.parseInt(request.getParameter("born"));
-	String addr = request.getParameter("addr");
-	String email = request.getParameter("email");
+	String admipid = request.getParameter("id");
+	String admippw = request.getParameter("pw");
+	String admipname = request.getParameter("name");
+	String admiptel = request.getParameter("tel");
+	int admipborn = Integer.parseInt(request.getParameter("born"));
+	String admipaddr = request.getParameter("addr");
+	String admipemail = request.getParameter("email");
+	int admippoint = Integer.parseInt(request.getParameter("point"));
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -28,7 +29,7 @@
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "insert into member values (?,?,?,?,?,?,?,default)";
+			sql = "insert into member values (?,?,?,?,?,?,?,default,?)";
 			try {
 				pstmt = conn.prepareStatement(sql);
 					
@@ -39,13 +40,14 @@
 				pstmt.setInt(5, born);
 				pstmt.setString(6, addr);
 				pstmt.setString(7, email);
+				pstmt.setInt(8, point);
 				
 				i = pstmt.executeUpdate();
 				
 				if(i>0){
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("admin_member_manage.jsp");
 				} else {
-					response.sendRedirect("join.jsp");
+					response.sendRedirect("admin_member_insert.jsp");
 				}
 				
 				pstmt.close();

@@ -3,55 +3,15 @@
     pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
 <%
-	String path_ist = request.getContextPath();
+	String path_bi = request.getContextPath();
 	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 
-	String iid = "";
+	String biid = "";
 	if(session.getAttribute("id")!=null){
-		iid = (String) session.getAttribute("id");
+		biid = (String) session.getAttribute("id");
 	}
-
-	String driver = "org.postgresql.Driver";
-	String url = "jdbc:postgresql://localhost/pro01";
-	String user = "postgres";
-	String pass = "1234";
-	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-
-	String sql = "";
-	
-	String aiid = request.getParameter("id");
-	String ibtit = request.getParameter("btit");
-	String ibbod = request.getParameter("bbody");
-	
-	int i = 0;
-	
-	try {
-		Class.forName(driver);
-		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			sql = "insert into board values(default, ?, ?, ?, default)";
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, ibtit);
-				pstmt.setString(2, ibbod);
-				pstmt.setString(3, aiid);
-				
-				pstmt.close();
-				conn.close();
-			} catch(SQLException e) {
-				System.out.println("SQL 구문 전송 실패");
-			}
-		} catch(SQLException e) {
-		System.out.println("DB 접속 실패");
-		}
-	} catch(ClassNotFoundException e) {
-	System.out.println("driver 로드 실패");
-	}
-%>
 %>
 <!DOCTYPE html>
 <html>

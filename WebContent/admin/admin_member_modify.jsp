@@ -10,15 +10,15 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = (String) session.getAttribute("id");
-	String mpw = "";
-	String mname = "";
-	String mtel = "";
-	int mborn = 0;
-	String maddr = "";
-	String memail = "";
-	int mpoint = 0;
-	String mregdate = "";
+	String admmfid = reqeust.getParameter("id");
+	String admmfpw = "";
+	String admmfname = "";
+	String admmftel = "";
+	int admmfborn = 0;
+	String admmfaddr = "";
+	String admmfemail = "";
+	int admmfpoint = 0;
+	String admmfregdate = "";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -33,18 +33,18 @@
 			sql = "select * from member where id=?";
 			try {
 				pstmt = conn.prepareStatement(sql);	
-				pstmt.setString(1, mid);
+				pstmt.setString(1, admmfid);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
-					mid = rs.getString("id");
-					mpw = rs.getString("pw");
-					mname = rs.getString("mname");
-					mtel = rs.getString("mtel");
-					mborn = Integer.parseInt(rs.getString("mborn"));
-					maddr = rs.getString("maddr");
-					memail = rs.getString("memail");
-					mpoint = Integer.parseInt(rs.getString("point"));
-					mregdate = rs.getString("regdate");
+					admmfid = rs.getString("id");
+					admmfpw = rs.getString("pw");
+					admmfname = rs.getString("mname");
+					admmftel = rs.getString("mtel");
+					admmfborn = Integer.parseInt(rs.getString("mborn"));
+					admmfaddr = rs.getString("maddr");
+					admmfemail = rs.getString("memail");
+					admmfpoint = Integer.parseInt(rs.getString("point"));
+					admmfregdate = rs.getString("regdate");
 				} 
 				rs.close();
 				pstmt.close();
@@ -115,7 +115,7 @@
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="./admin_hd.jsp" %>
         <div class="join_content">
             <section class="page">
 				<h1 class="title">회원 정보 페이지</h1>
@@ -125,39 +125,39 @@
 							<tbody>
 								<tr>
 									<th><label for="id" class="lb">아이디</label></th>
-									<td><input type="text" name="id" id="id" value="<%=mid %>" readonly></td>
+									<td><input type="text" name="id" id="id" value="<%=admmfid %>" readonly></td>
 								</tr>
 								<tr>
 									<th><label for="pw" class="lb">비밀번호</label></th>
-									<td><input type="password" name="pw" id="pw" value="<%=mpw %>" required></td>
+									<td><input type="password" name="pw" id="pw" value="<%=admmfpw %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="name" class="lb">이름</label></th>
-									<td><input type="text" name="name" id="name" value="<%=mname %>" required></td>
+									<td><input type="text" name="name" id="name" value="<%=admmfname %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="tel" class="lb">전화번호</label></th>
-									<td><input type="tel" name="tel" id="tel" value="<%=mtel %>" required></td>
+									<td><input type="tel" name="tel" id="tel" value="<%=admmftel %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="born" class="lb">생년월일(yyyymmdd)</label></th>
-									<td><input type="text" name="born" id="born" value="<%=mborn %>" required></td>
+									<td><input type="text" name="born" id="born" value="<%=admmfborn %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="email" class="lb">이메일</label></th>
-									<td><input type="email" name="email" id="email" value="<%=memail %>" required></td>
+									<td><input type="email" name="email" id="email" value="<%=admmfemail %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="addr" class="lb">주소</label></th>
-									<td><input type="text" name="addr" id="addr" value="<%=maddr %>" required></td>
+									<td><input type="text" name="addr" id="addr" value="<%=admmfaddr %>" required></td>
 								</tr>
 								<tr>
 									<th><label for="point" class="lb">포인트</label></th>
-									<td><input type="text" name="point" id="point"  value="<%=mpoint %>" readonly></td>
+									<td><input type="text" name="point" id="point"  value="<%=admmfpoint %>" ></td>
 								</tr>
 								<tr>
 									<th><label for="regdate" class="lb">가입일</label></th>
-									<td><input type="text" name="regdate" id="regdate"  value="<%=mregdate %>" readonly></td>
+									<td><input type="text" name="regdate" id="regdate"  value="<%=admmfregdate %>" readonly></td>
 								</tr>
 								<tr>
 									<td>
@@ -171,7 +171,7 @@
 				</div>
 			</section>
 		</div>
-<%@ include file="./ft.jsp" %>
+<%@ include file="../ft.jsp" %>
 	</div>
 </body>
 <!-- 

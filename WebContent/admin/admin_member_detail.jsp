@@ -10,15 +10,15 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = (String) session.getAttribute("id");
-	String mpw = "";
-	String mname = "";
-	String mtel = "";
-	int mborn = 0;
-	String maddr = "";
-	String memail = "";
-	int mpoint = 0;
-	String mregdate = "";
+	String admid = (String) session.getAttribute("id");
+	String admpw = "";
+	String admname = "";
+	String admtel = "";
+	int admborn = 0;
+	String admaddr = "";
+	String admemail = "";
+	int admpoint = 0;
+	String admregdate = "";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -36,15 +36,15 @@
 				pstmt.setString(1, mid);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
-					mid = rs.getString("id");
-					mpw = rs.getString("pw");
-					mname = rs.getString("mname");
-					mtel = rs.getString("mtel");
-					mborn = Integer.parseInt(rs.getString("mborn"));
-					maddr = rs.getString("maddr");
-					memail = rs.getString("memail");
-					mpoint = Integer.parseInt(rs.getString("point"));
-					mregdate = rs.getString("regdate");
+					admid = rs.getString("id");
+					admpw = rs.getString("pw");
+					admname = rs.getString("mname");
+					admtel = rs.getString("mtel");
+					admborn = Integer.parseInt(rs.getString("mborn"));
+					admaddr = rs.getString("maddr");
+					admemail = rs.getString("memail");
+					admpoint = Integer.parseInt(rs.getString("point"));
+					admregdate = rs.getString("regdate");
 				} 
 				rs.close();
 				pstmt.close();
@@ -66,7 +66,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MY PAGE</title>
+    <title>ADMIN_MEMBER_DETAIL</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -115,53 +115,53 @@
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="./admin_hd.jsp" %>
         <div class="content">
             <section class="page">
-				<h1 class="title">MY PAGE</h1>
+				<h1 class="title">회원 정보 상세</h1>
             	<div class="page_wrap">
 					<table>
 						<tbody>
 							<tr>
 								<th>아이디</th>
-								<td><%=mid %></td>
+								<td><%=admid %></td>
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><%=mpw %></td>
+								<td><%=admpw %></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td><%=mname %></td>
+								<td><%=admname %></td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
-								<td><%=mtel %></td>
+								<td><%=admtel %></td>
 							</tr>
 							<tr>
 								<th>생년월일(yyyymmdd)</th>
-								<td><%=mborn %></td>
+								<td><%=admborn %></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td><%=memail %></td>
+								<td><%=admemail %></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><%=maddr %></td>
-							</tr>
-							<tr>
-								<th>가입일</th>
-								<td><%=mregdate %></td>
+								<td><%=admaddr %></td>
 							</tr>
 							<tr>
 								<th>포인트</th>
-								<td><%=mpoint %></td>
+								<td><%=admpoint %></td>
+							</tr>
+							<tr>
+								<th>가입일</th>
+								<td><%=admregdate %></td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<a href="mypage_modify.jsp?id=<%=mid %>" class="btn btn-primary">정보수정</a>
-									<a href="member_del_pro.jsp?id=<%=mid %>" class="btn btn-cancel">회원탈퇴</a>
+									<a href="admin_member_modify.jsp?id=<%=admid %>" class="btn btn-primary">정보수정</a>
+									<a href="admin_member_del_pro.jsp?id=<%=admid %>" class="btn btn-cancel">회원탈퇴</a>
 								</td>
 							</tr>
 						</tbody>
@@ -169,7 +169,7 @@
 				</div>
 			</section>
 		</div>
-<%@ include file="./ft.jsp" %>
+<%@ include file="../ft.jsp" %>
 	</div>
 </body>
 <!-- 

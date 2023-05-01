@@ -33,36 +33,11 @@
             <a href="<%=path_adm_hd %>/index.jsp" class="logo"><img src="<%=path_adm_hd %>/images/pop-logo.jpg" alt="">NongShimlogo</a>
             <nav class="gnb">
                 <ul class="gnb_fr">
-                    <li><a href="<%=path_adm_hd %>/intro.jsp">농심소개</a>
-                        <div class="sub item1">
-                            <ul class="dp2">
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="<%=path_adm_hd %>/prosperity.jsp">지속가능경영</a>
-                        <div class="sub item2">
-                            <ul class="dp2">
-                           </ul>
-                        </div>
-                    </li>
-                    <li><a href="<%=path_adm_hd %>/board/advert.jsp">홍보센터</a>
-                        <div class="sub item3">
-                            <ul class="dp2">
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="<%=path_adm_hd %>/invest.jsp">투자정보</a>
-                        <div class="sub item4">
-                            <ul class="dp2">
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a href="<%=path_adm_hd %>/cs.jsp">고객서비스</a>
-                        <div class="sub item5">
-                            <ul class="dp2">
-                            </ul>
-                        </div>
-                    </li>
+                    <li><a href="<%=path_adm_hd %>/admin/admin_member_manage.jsp">회원관리</a></li>
+                    <li><a href="<%=path_adm_hd %>/admin/admin_board_manage.jsp">게시판관리</a></li>
+                    <li><a href="">홍보관리</a></li>
+                    <li><a href="">투자 정보 관리</a></li>
+                    <li><a href="">CS 관리</a></li>
                 </ul>
             </nav>
             <label for="sitemap_ck" class="sitemap_btn">사이트맵</label>

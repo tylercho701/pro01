@@ -53,31 +53,6 @@
             	<h1 class="title">ADMIN PAGE</h1>
                 <div class="img_box">
                 </div>
-            </figure>
-            <section class="page" id="page1">
-                <h2 class="page_title">한국을 대표하는 맛, 세계를 감동시킨 우리의 맛</h2>
-                <div class="page_wrap">
-                </div>
-            </section>
-            <section class="page" id="page2">
-	            <h2 class="page_title">투자의 블루칩 농심, 농심의 주가정보를 상세하게 전달해 드립니다.</h2>
-                </div>
-            </section>
-            <section class="page" id="page3">
-                <h2 class="page_title">투자의 블루칩 농심, 농심의 주가정보를 상세하게 전달해 드립니다.</h2>
-                <div class="page_wrap">
-                </div>
-            </section>
-            <section class="page" id="page4">
-                <h2 class="page_title">내일을 위한 새롭고 활기찬 농심 소식</h2>
-                <div class="page_wrap">
-                </div>
-            </section>
-            <section class="page" id="page5">
-                <h2 class="page_title">(주)농심은 고객님의 의견에 대해 빠르고 정확한 처리를 약속 드립니다.</h2>
-                <div class="page_wrap">
-                </div>
-            </section>
         </div>
 <%@ include file="../ft.jsp" %>
     </div>

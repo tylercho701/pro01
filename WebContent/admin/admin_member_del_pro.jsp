@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<% 
+<% 	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 	
@@ -29,9 +29,9 @@
 				i = pstmt.executeUpdate();
 				
 				if(i>0){
-					response.sendRedirect("logout.jsp");
+					response.sendRedirect("./admin_member_manage.jsp");
 				} else {
-					response.sendRedirect("mypage.jsp?id="+id);
+					response.sendRedirect("./admin_member_manage.jsp");
 				}
 				pstmt.close();
 				conn.close();

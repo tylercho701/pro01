@@ -10,13 +10,13 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String mid = request.getParameter("id");
-	String mpw = request.getParameter("pw");
-	String mname = request.getParameter("name");
-	String mtel = request.getParameter("tel");
-	int mborn = Integer.parseInt(request.getParameter("born"));
-	String maddr = request.getParameter("addr");
-	String memail = request.getParameter("email");
+	String admmfpid = request.getParameter("id");
+	String admmfppw = request.getParameter("pw");
+	String admmfpname = request.getParameter("name");
+	String admmfptel = request.getParameter("tel");
+	int admmfpborn = Integer.parseInt(request.getParameter("born"));
+	String admmfpaddr = request.getParameter("addr");
+	String admmfpemail = request.getParameter("email");
 		
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -29,24 +29,25 @@
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "update member set pw=?, name = ?, tel = ?, born_at = ?, addr = ?, email = ? where id = ?";
+			sql = "update member set pw=?, mname = ?, mtel = ?, mborn = ?, maddr = ?, memail = ?, point = ? where id = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);	
 				
-				pstmt.setString(1, mpw);
-				pstmt.setString(2, mname);
-				pstmt.setString(3, mtel);
-				pstmt.setInt(4, mborn);
-				pstmt.setString(5, maddr);
-				pstmt.setString(6, memail);
-				pstmt.setString(7, mid);
+				pstmt.setString(1, admmfppw);
+				pstmt.setString(2, admmfpname);
+				pstmt.setString(3, admmfptel);
+				pstmt.setInt(4, admmfpborn);
+				pstmt.setString(5, admmfpaddr);
+				pstmt.setString(6, admmfpemail);
+				pstmt.setInt(7, admmfppoint);
+				pstmt.setString(8, admmfpid);
 				
 				i = pstmt.executeUpdate();
 								
 				if(i>0){
-					response.sendRedirect("mypage.jsp?id="+mid);
+					response.sendRedirect("admin_member_manage.jsp");
 				} else {
-					response.sendRedirect("member_modify.jsp?id="+mid);
+					response.sendRedirect("admin_member_modify.jsp?id="+admmfpid);
 				}
 				
 				pstmt.close();
