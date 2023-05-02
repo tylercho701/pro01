@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ADMIN_INSERT_MEMBER</title>
+    <title>관리자용_회원 추가</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -35,8 +35,9 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../layout_sub.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }

@@ -1,19 +1,26 @@
+<%@ page import="java.sql.DriverManager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% 
-	String path = request.getContextPath();
-
+    pageEncoding="UTF-8" %>
+<%@ page import="java.sql.*" %>
+<%
+	String path_bi = request.getContextPath();
+	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
+
+	String biid = "";
+	if(session.getAttribute("id")!=null){
+		biid = (String) session.getAttribute("id");
+	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>포트폴리오 - 농심</title>
+    <title>관리자용_공지 등록</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -38,10 +45,11 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="layout_sub.css">
+    <link rel="stylesheet" href="<%=path_bi %>/common.css">
+    <link rel="stylesheet" href="<%=path_bi %>/main.css">
 	<style>
+	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
+	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
@@ -56,47 +64,41 @@
     .page_tit { text-align:center; font-size:32px; }
     .vs { height:auto; }
     .title {line-height:10vh; }
-    .page { height: 50vh; }
-    .page_comment { text-shadow:1px 1px 3px #333; color:#fff; }
-    .content { background-image: url("./images/overview_group.png"); }
+    .page { height: 80vh; }
 	</style>
 </head>
 <body>
     <div class="container">
-<%@ include file="./hd.jsp" %>
+<%@ include file="./admin_hd.jsp" %>
         <div class="content">
-            <figure class="vs">
-                <div class="img_box">
-                    <h1 class="tit">투자정보</h1>
-                </div>
-            </figure>
-            <section class="page" id="page1">
-                <h2 class="page_tit">주식에 관한 사항</h2>
-                <div class="page_wrap">
-
-                </div>
-            </section>
-            <section class="page" id="page2">
-                <h2 class="page_tit">주가정보</h2>
-                <div class="page_wrap">
-
-                </div>
-            </section>
-            <section class="page" id="page3">
-                <h2 class="page_tit">IR정보</h2>
-                <div class="page_wrap">
-
-                </div>
-            </section>
-            <section class="page" id="page4">
-                <h2 class="page_tit">공시정보</h2>
-                <div class="page_wrap">
-
-                </div>
-            </section>
-        </div>
-<%@ include file="./ft.jsp" %>
-    </div>
+		     <section class="page" id="page1">
+				<h2 class="page_title">공지사항 등록</h2>
+				<div class="page_wrap">
+					<form name="admin_boardinsert_form" action="admin_boardInsert_pro.jsp" method="post">
+						<table class="table">
+							<tbody>
+								<tr>
+									<th><label for="btit" class="lb">Title</label></th>
+									<td><input type="text" name="btit" id="btit" required></td>
+								</tr>
+								<tr>
+									<th><label for="bbody" class="lb">Content</label></th>
+									<td><textarea name="bbody" id="bbody" cols=30 rows=5></textarea></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="submit" value="글 등록" class="btn btn-primary"> &nbsp; &nbsp; &nbsp; &nbsp;
+										<input type="reset" value="취소" class="btn btn-cancel">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</section>
+		</div>
+<%@ include file="../ft.jsp" %> 
+	</div>
 </body>
 <!-- 
 <h1>농심</h1>

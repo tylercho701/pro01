@@ -1,0 +1,22 @@
+
+	메인화면(index.jsp) -> 
+				농심소개(intro.jsp) / 
+				지속가능경영(prosperity.jsp) / 
+				홍보센터(advert.jsp) / 
+				투자정보(invest.jsp) / 
+				고객서비스(cs.jsp)
+
+	회원기능
+		회원가입 -> 약관 페이지(agreement.jsp) -> 회원가입(join.jsp) -> 아이디 중복 확인(idCkeck.jsp)
+		-> 회원가입 처리(join_pro.jsp) -> 메인화면(index.jsp)
+
+		로그인 -> 로그인 화면(login.jsp) -> 로그인 처리(login_pro.jsp) -> 메인화면(index.jsp)
+
+		마이페이지 -> 마이페이지(mypage.jsp) -> 정보 수정(mypage_modify.jsp) -> 정보 수정 처리(mypage_modify_pro.jsp) -> 마이페이지(mypage.jsp)
+
+		회원 탈퇴 --> 마이페이지(mypage.jsp) -> 회원 탈퇴(member_del_pro.jsp) -> 세션 아웃 처리(logout.jsp) -> 메인화면(index.jsp)
+
+	관리자 기능
+		회원 정보 수정 -> 관리자 페이지(admin_index.jsp) -> 회원관리(admin_member_manage.jsp) -> 특정 회원 상세 페이지(admin_member_detail.jsp) -> 정보 수정(admin_member_modify.jsp) -> 정보 수정 처리(admin_member_modify_pro.jsp) -> 회원관리(admin_member_manage.jsp)
+
+		회원 탈퇴 처리

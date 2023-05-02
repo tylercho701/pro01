@@ -20,7 +20,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>관리자용_회원 목록</title>
+    <title>관리자용 게시판</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -49,8 +49,6 @@
     <link rel="stylesheet" href="<%=path_adv %>/main.css">
     <link rel="stylesheet" href="<%=path_adv %>/layout_sub.css">
 	<style>
-	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
-	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
@@ -66,25 +64,21 @@
     .vs { height:auto; }
     .title {line-height:10vh; }
     .page { height: 50vh; }
+    .page_comment { text-shadow:1px 1px 3px #333; color:#fff; }
+    .content { background-image: url("./images/bae_hong_dong_yoo_jae_seok.jpg"); }
 	</style>
 </head>
 <body>
     <div class="container">
 <%@ include file="./admin_hd.jsp" %>
         <div class="content">
-            <figure class="vs">
-                <div class="img_box">
-                </div>
-            </figure>
-			<section class="page" id="page1">
-				<h2 class="page_title">회원목록</h2>
+		     <section class="page" id="page1">
+				<h2 class="page_title">관리자 공지 목록</h2>
 				<div class="page_wrap">
 					<table class="table">
 						<thead>
 							<tr>
-								<th>member_ID</th><th>member_name</th><th>member_tel</th>
-								<th>member_birth</th><th>member_addr</th><th>member_email</th>
-								<th>member_regdate</th><th>member_point</th>
+								<th>board_num</th><th>board_tit</th><th>written_at</th><th>written_by</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -103,35 +97,54 @@
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member";
+			sql = "select a.bnum as bnum, a.btitle as title, a.written_at as written_at, b.mname as written_by from board a inner join member b on a.written_by = b.id order by bnum desc";
 			try {
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();	
 				while(rs.next()){
 %>
 							<tr>
-								<td><%=rs.getString("id") %></td>
+								<td><%=rs.getInt("bnum") %></td>
 								<td>
 <%
-	if(aid!=""){
+					if(aid!=""){
 %>
-								<a href="<%=path_adv %>/admin/admin_member_detail.jsp?id=<%=rs.getString("id") %>"><%=rs.getString("mname") %></a>
-								</td>
+								<a href="<%=path_adv %>/admin/admin_boardDetail.jsp?bnum=<%=rs.getString("bnum") %>"><%=rs.getString("title") %></a>
 <%
-} 
+					} else {
 %>
-								<td><%=rs.getString("mtel") %></td>
-								<td><%=Integer.parseInt(rs.getString("mborn")) %></td>
-								<td><%=rs.getString("maddr") %></td>
-								<td><%=rs.getString("memail") %></td>
-								<td><%=rs.getString("regdate") %></td>
-								<td><%=Integer.parseInt(rs.getString("point")) %></td>
+								<span><%=rs.getString("title") %></span>
+<%
+					}
+%>
+								</td>
+								<td><%=rs.getString("written_at") %></td>
+								<td><%=rs.getString("written_by") %></td>
 							</tr>
-						</tbody>
 <%
 				}
 %>
+						</tbody>
 					</table>
+					<div>
+<%
+							if(aid!=""){
+%>						
+						<a href="<%=path_adv %>/admin/admin_boardInsert.jsp" class="btn btn-primary">글 쓰기</a>
+<%
+							} else {
+%>
+						<h3 class="data">로그인 후에 글쓰기가 가능합니다.</h3>
+<%
+							}
+%>
+					</div>
+				</div>
+				<script>
+				$(document).ready(function(){
+				    $('#tb1').DataTable({'order': [[0, 'desc']]});
+				});
+				</script>
 				</div>
 			</section>
 		</div>

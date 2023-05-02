@@ -40,7 +40,25 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="layout_sub.css">
 	<style>
+	.vs { height:500px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	#page1 .page_wrap { width: 800px; }
+	.table { width:800px; margin:0 auto; padding-top:20px; border-top:2px solid #333; text-align:center; }
+	th {  text-align: center;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+    td { padding-top:10px; padding-bottom: 10px; }
+    .lb { display:block;  font-size:20px; }
+	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
+         text-align: center; padding:10px 20px;  cursor:pointer; }
+    .btn-primary { background: #333; color:#fff; }
+    .btn-cancel { background: crimson; color:#fff; }
+    .page_tit { text-align:center; font-size:32px; }
+    .vs { height:auto; }
+    .title {line-height:10vh; }
+    .page { height: 50vh; }
+    .page_comment { text-shadow:1px 1px 3px #333; color:#fff; }
+    .content { background-image: url("./images/ci1.png"); }
 	</style>
 </head>
 <body>

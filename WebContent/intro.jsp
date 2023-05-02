@@ -42,17 +42,25 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="layout_sub.css">
 	<style>
-	.content { background-image: url("./images/top_solution.jpg"); }
-    #page1 .grid4 li { text-align: center; box-sizing:border-box; border:1px solid #eee; height: 300px; }
-    #page1 .grid4 .grid_tit { font-size:28px; font-weight:200; color:#075d46; padding-top:50px;  }
-    #page1 .grid4 .grid_tit:after { content:""; display:block; clear:both; width:80px;
-    height:5px; background-color:#075d46; margin:30px auto; }
-    #page1 .grid4 .grid_com { padding-top: 14px; }
-
-    #page2 { background-image: url("./images/esg01_landscape.jpg"); background-position:center center;
-    background-size:100% auto; background-attachment: fixed; }
+	.vs { height:500px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	.page1{  }
+	#page1 .page_wrap { width: 800px; }
+	.table { width:800px; margin:0 auto; padding-top:20px; border-top:2px solid #333; text-align:center; }
+	th {  text-align: center;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
+    td { padding-top:10px; padding-bottom: 10px; }
+    .lb { display:block;  font-size:20px; }
+	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
+         text-align: center; padding:10px 20px;  cursor:pointer; }
+    .btn-primary { background: #333; color:#fff; }
+    .btn-cancel { background: crimson; color:#fff; }
+    .page_tit { text-align:center; font-size:32px; }
+    .vs { height:auto; }
+    .title {line-height:10vh; }
+    .page { height: 50vh; }
     .page_comment { text-shadow:1px 1px 3px #333; color:#fff; }
-    .content { background-image: url("./images/bae_hong_dong_yoo_jae_seok.jpg"); }
+    .content { background-image: url("./images/contribution_overview_01.png"); }
+    .grid4 .grid_box li { width: 300px; margin-right: 25px; float:left; height:auto; }
 	</style>
 </head>
 <body>
@@ -65,40 +73,12 @@
                 </div>
             </figure>
             <section class="page" id="page1">
-                <h2 class="page_tit">농심</h2>
+            	<h2 class="page_tit">농심</h2>
                 <div class="page_wrap">
                     <p class="page_comment">
                         인생을 맛있게,
                         일상의 행복에 가치를 더하는
                         세계를 감동시긴 우리의 맛이 되겠습니다. 
-                    </p>
-                </div>
-            </section>
-            <section class="page" id="page2">
-                <h2 class="page_tit">경영이념</h2>
-                <div class="page_wrap">
-                    <p class="page_comment">
-                        농심이 성장할 수 있었던 원동력,
-                        농심의 핵심 가치와 경영 철학을 바탕으로 참된 기업을 만들어 나가겠습니다.
-                    </p>
-                </div>
-            </section>
-            <section class="page" id="page3">
-                <h2 class="page_tit">연혁</h2>
-                <div class="page_wrap">
-                    <p class="page_comment">
-                        농심은 50년 넘게 고객의 곁을 지키며
-                        발전했습니다.<br>
-                        농심의 역사는 지금 이 순간에도 만들어지고 있습니다.
-                    </p>
-                </div>
-            </section>
-            <section class="page" id="page4">
-                <h2 class="page_tit">세계속의 농심</h2>
-                <div class="page_wrap">
-                    <p class="page_comment">
-                        농심은 아시아를 시작해서 미주, 유럽, 대양지역에까지 진출했습니다.
-                        전 세계인과 함께하는 농심의 활약상을 알려드립니다.
                     </p>
                 </div>
             </section>
@@ -123,7 +103,6 @@
                                 <p class="grid_com">경기도 군포시 농심로 35 (당정동)</p>
                             </div>
                         </li>
-
                     </ul>
                 </article>
             </section>
@@ -136,3 +115,13 @@
 <a href="https://tylercho701.github.io">메인</a> 
 -->
 </html>
+<!-- 
+    #page1 .grid4 li { text-align: center; box-sizing:border-box; border:1px solid #eee; height: 300px; }
+    #page1 .grid4 .grid_tit { font-size:28px; font-weight:200; color:#075d46; padding-top:50px;  }
+    #page1 .grid4 .grid_tit:after { content:""; display:block; clear:both; width:80px;
+    height:5px; background-color:#075d46; margin:30px auto; }
+    #page1 .grid4 .grid_com { padding-top: 14px; }
+
+    #page2 { background-image: url("./images/esg01_landscape.jpg"); background-position:center center;
+    background-size:100% auto; background-attachment: fixed; }
+ -->

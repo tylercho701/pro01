@@ -45,8 +45,8 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=path_ist %>/common.css">
-    <link rel="stylesheet" href="<%=path_ist %>/main.css">
+    <link rel="stylesheet" href="<%=path_bi %>/common.css">
+    <link rel="stylesheet" href="<%=path_bi %>/main.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }

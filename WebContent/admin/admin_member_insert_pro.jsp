@@ -33,14 +33,14 @@
 			try {
 				pstmt = conn.prepareStatement(sql);
 					
-				pstmt.setString(1, id);
-				pstmt.setString(2, pw);
-				pstmt.setString(3, name);
-				pstmt.setString(4, tel);
-				pstmt.setInt(5, born);
-				pstmt.setString(6, addr);
-				pstmt.setString(7, email);
-				pstmt.setInt(8, point);
+				pstmt.setString(1, admipid);
+				pstmt.setString(2, admippw);
+				pstmt.setString(3, admipname);
+				pstmt.setString(4, admiptel);
+				pstmt.setInt(5, admipborn);
+				pstmt.setString(6, admipaddr);
+				pstmt.setString(7, admipemail);
+				pstmt.setInt(8, admippoint);
 				
 				i = pstmt.executeUpdate();
 				

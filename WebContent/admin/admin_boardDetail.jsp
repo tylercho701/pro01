@@ -8,10 +8,33 @@
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 
-	String aid = "";
+	String did = "";
 	if(session.getAttribute("id")!=null){
-		aid = (String) session.getAttribute("id");
+		did = (String) session.getAttribute("id");
 	}
+	
+	String driver = "org.postgresql.Driver";
+	String url = "jdbc:postgresql://localhost/pro01";
+	String user = "postgres";
+	String pass = "1234";
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String sql = "";
+	
+	int dbnum = Integer.parseInt(request.getParameter("bnum"));
+	String ckId = "";
+	
+	try {
+		Class.forName(driver);
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			sql = "select a.bnum as bnum, a.btitle as title, a.bbody as bbody, a.written_at as written_at, b.mname as written_by from board a inner join member b on a.written_by = b.id where bnum = ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, dbnum);
+				rs = pstmt.executeQuery();	
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +43,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>관리자용_회원 목록</title>
+    <title>관리자용_공지 상세</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -47,12 +70,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=path_adv %>/common.css">
     <link rel="stylesheet" href="<%=path_adv %>/main.css">
-    <link rel="stylesheet" href="<%=path_adv %>/layout_sub.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
-	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
+	.page_title {text-align: center; font-size: 48px; padding-top: 50px; margin-right:80px; }
 	#page1 .page_wrap { width: 800px; }
 	.table { width:800px; margin:0 auto; padding-top:20px; border-top:2px solid #333; text-align:center; }
 	th {  text-align: center;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
@@ -65,7 +87,7 @@
     .page_tit { text-align:center; font-size:32px; }
     .vs { height:auto; }
     .title {line-height:10vh; }
-    .page { height: 50vh; }
+    .page { height: 70vh; }
 	</style>
 </head>
 <body>
@@ -77,60 +99,49 @@
                 </div>
             </figure>
 			<section class="page" id="page1">
-				<h2 class="page_title">회원목록</h2>
+				<h2 class="page_title">자세히보기</h2>
 				<div class="page_wrap">
 					<table class="table">
-						<thead>
-							<tr>
-								<th>member_ID</th><th>member_name</th><th>member_tel</th>
-								<th>member_birth</th><th>member_addr</th><th>member_email</th>
-								<th>member_regdate</th><th>member_point</th>
-							</tr>
-						</thead>
 						<tbody>
 <%
-	String driver = "org.postgresql.Driver";
-	String url = "jdbc:postgresql://localhost/pro01";
-	String user = "postgres";
-	String pass = "1234";
-	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	String sql = "";
-	
-	try {
-		Class.forName(driver);
-		try {
-			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member";
-			try {
-				pstmt = conn.prepareStatement(sql);
-				rs = pstmt.executeQuery();	
-				while(rs.next()){
+	if(rs.next()){
+%>	
+							<tr>
+								<th>board_num</th>
+								<td><%=rs.getInt("bnum") %></td>
+							</tr>
+							<tr>
+								<th>board_tit</th>
+								<td><%=rs.getString("title") %></td>
+							</tr>
+							<tr>
+								<th>content</th>
+								<td><%=rs.getString("bbody") %></td>
+							</tr>
+							<tr>
+								<th>written_at</th>
+								<td><%=rs.getString("written_at") %></td>
+							</tr>
+							<tr>
+								<th>written_by</th>
+								<td><%=rs.getString("written_by") %></td>
+							</tr>
+<%
+	}
 %>
 							<tr>
-								<td><%=rs.getString("id") %></td>
-								<td>
+							<td colspan="2">
+								<a href="<%=path_adv %>/admin/admin_board_manage.jsp" class="btn btn-primary">글 목록</a>
 <%
-	if(aid!=""){
+	if(did.equals("admin")){
 %>
-								<a href="<%=path_adv %>/admin/admin_member_detail.jsp?id=<%=rs.getString("id") %>"><%=rs.getString("mname") %></a>
-								</td>
+								<a href="<%=path_adv %>/admin/admin_boardUpdate.jsp?bnum=<%=dbnum %>" class="btn btn-primary">글 수정</a>								
+								<a href="<%=path_adv %>/admin/admin_boardDel_pro.jsp?bnum=<%=dbnum %>" class="btn btn-cancel">삭제</a>
 <%
-} 
+	}
 %>
-								<td><%=rs.getString("mtel") %></td>
-								<td><%=Integer.parseInt(rs.getString("mborn")) %></td>
-								<td><%=rs.getString("maddr") %></td>
-								<td><%=rs.getString("memail") %></td>
-								<td><%=rs.getString("regdate") %></td>
-								<td><%=Integer.parseInt(rs.getString("point")) %></td>
-							</tr>
+							</td>
 						</tbody>
-<%
-				}
-%>
 					</table>
 				</div>
 			</section>

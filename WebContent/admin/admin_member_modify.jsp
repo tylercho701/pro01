@@ -10,7 +10,7 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String admmfid = reqeust.getParameter("id");
+	String admmfid = request.getParameter("id");
 	String admmfpw = "";
 	String admmfname = "";
 	String admmftel = "";
@@ -66,7 +66,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MY PAGE</title>
+    <title>관리자용_회원 정보 수정</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -91,18 +91,17 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../layout_sub.css">
 	<style>
-	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
-	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
 	.table { width:800px; margin:4px auto; padding-top:20px; border-top:2px solid #333; padding-left:250px; }
 	th {  text-align: justify;  line-height: 0; width:180px; padding-top:10px; padding-bottom: 10px;}
     td { padding-top:10px; padding-bottom: 10px; }
-    .lb { display:block;  font-size:20px; }
+    .lb { display:block;  font-size:15px; }
 	.btn { display:inline-block; outline:none; border:none; border-radius:8px; margin:16px;
          text-align: center; padding:10px 20px;  cursor:pointer; }
     .btn-primary { background: #333; color:#fff; }
@@ -111,16 +110,17 @@
     .vs { height:auto; }
     .title {line-height:10vh; }
     .page { height: 80vh; }
+    .page_wrap table{ margin-left:500px; }
 	</style>
 </head>
 <body>
     <div class="container">
 <%@ include file="./admin_hd.jsp" %>
-        <div class="join_content">
+        <div class="content">
             <section class="page">
-				<h1 class="title">회원 정보 페이지</h1>
+				<h1 class="title">회원 정보 수정</h1>
             	<div class="page_wrap">
-					<form name="join_form" action="join_pro.jsp" method="post">
+					<form name="admin_modify_form" action="admin_member_modify_pro.jsp" method="post">
 						<table>
 							<tbody>
 								<tr>
@@ -160,9 +160,9 @@
 									<td><input type="text" name="regdate" id="regdate"  value="<%=admmfregdate %>" readonly></td>
 								</tr>
 								<tr>
-									<td>
-										<a href="mypage_modify_pro.jsp?id=<%=mid %>" class="btn btn-primary">정보수정</a>
-										<a href="member_del_pro.jsp?id=<%=mid %>" class="btn btn-cancel">회원탈퇴</a>
+									<td colspan="2">
+										<input type="submit" class="btn btn-primary" value="정보수정">
+										<input type="reset" class="btn btn-cancel" value="취소">
 									</td>
 								</tr>
 							</tbody>

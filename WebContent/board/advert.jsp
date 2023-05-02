@@ -47,9 +47,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=path_adv %>/common.css">
     <link rel="stylesheet" href="<%=path_adv %>/main.css">
+    <link rel="stylesheet" href="<%=path_adv %>/layout_sub.css">
 	<style>
-	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
-	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
@@ -65,7 +64,9 @@
     .vs { height:auto; }
     .title {line-height:10vh; }
     .page { height: 50vh; }
-	</style>
+    .page_comment { text-shadow:1px 1px 3px #333; color:#fff; }
+    .content { background-image: url("../images/main_brand.png"); }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -73,23 +74,10 @@
         <div class="content">
             <figure class="vs">
                 <div class="img_box">
+                    <h1 class="tit">홍보센터</h1>
                 </div>
             </figure>
 			<section class="page" id="page1">
-				<h2 class="page_title">OVERVIEW</h2>
-				<div class="page_wrap">
-					<div class="tit_box">
-				
-					</div>
-				</div>
-			</section>
-			<section class="page" id="page2">
-				<h2 class="page_title">농시미서포트</h2>
-				<div class="page_wrap">
-		              
-				</div>
-		     </section>
-		     <section class="page" id="page3">
 				<h2 class="page_title">농심소식</h2>
 				<div class="page_wrap">
 					<table class="table">
@@ -141,20 +129,11 @@
 <%
 				}
 %>
-							<tr>
-<%
-					if(aid!=""){
-%>
-								<td><a href="boardInsert.jsp?id?<%=aid %>" class="btn btn-primary" >글쓰기</a></td>
-<%
-					}
-%>
-							</tr>
 						</tbody>
 					</table>
 					<div>
 <%
-							if(pid!=""){
+							if(aid!=""){
 %>						
 						<a href="<%=path_adv %>/board/boardInsert.jsp" class="btn btn-primary">글 쓰기</a>
 <%
@@ -173,14 +152,28 @@
 				</script>
 				</div>
 			</section>
-			<section class="page" id="page4">
-				<h2 class="page_title">농심TV</h2>
-				<div class="page_wrap">
-				</div>
-				</section>
-			<section class="page" id="page5">
+			<section class="page" id="page3">
 				<h2 class="page_title">라면피디아</h2>
 				<div class="page_wrap">
+					<article>
+						<ul class="col_box">
+							<li class="left">
+								<a class="item1"><span>농심쌀국수</span></a>
+								<a class="item2"><span>감자면</span></a>
+								<a class="item3"><span>감자탕면</span></a>
+							</li>
+							<li class="center">
+								<a class="item1"><span>맛짬뽕</span></a>
+								<a class="item2"><span>육개장</span></a>
+								<a class="item3"><span>안성탕면</span></a>
+							</li>
+							<li class="right">
+								<a class="item1"><span>오징어짬뽕</span></a>
+								<a class="item2"><span>튀김우동</span></a>
+								<a class="item3"><span>무파마탕면</span></a>
+							</li>
+						</ul>
+					</article>
 				</div>
 			</section>
 		</div>

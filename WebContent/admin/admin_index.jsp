@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>포트폴리오 - 농심</title>
+    <title>포트폴리오 - 농심_관리자 페이지</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">

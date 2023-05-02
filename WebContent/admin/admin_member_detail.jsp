@@ -10,15 +10,15 @@
 	String user = "postgres";
 	String pass = "1234";
 	
-	String admid = (String) session.getAttribute("id");
-	String admpw = "";
-	String admname = "";
-	String admtel = "";
-	int admborn = 0;
-	String admaddr = "";
-	String admemail = "";
-	int admpoint = 0;
-	String admregdate = "";
+	String admdid = request.getParameter("id");
+	String admdpw = "";
+	String admdname = "";
+	String admdtel = "";
+	int admdborn = 0;
+	String admdaddr = "";
+	String admdemail = "";
+	int admdpoint = 0;
+	String admdregdate = "";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -33,18 +33,18 @@
 			sql = "select * from member where id=?";
 			try {
 				pstmt = conn.prepareStatement(sql);	
-				pstmt.setString(1, mid);
+				pstmt.setString(1, admdid);
 				rs = pstmt.executeQuery();
 				if(rs.next()){
-					admid = rs.getString("id");
-					admpw = rs.getString("pw");
-					admname = rs.getString("mname");
-					admtel = rs.getString("mtel");
-					admborn = Integer.parseInt(rs.getString("mborn"));
-					admaddr = rs.getString("maddr");
-					admemail = rs.getString("memail");
-					admpoint = Integer.parseInt(rs.getString("point"));
-					admregdate = rs.getString("regdate");
+					admdid = rs.getString("id");
+					admdpw = rs.getString("pw");
+					admdname = rs.getString("mname");
+					admdtel = rs.getString("mtel");
+					admdborn = Integer.parseInt(rs.getString("mborn"));
+					admdaddr = rs.getString("maddr");
+					admdemail = rs.getString("memail");
+					admdpoint = Integer.parseInt(rs.getString("point"));
+					admdregdate = rs.getString("regdate");
 				} 
 				rs.close();
 				pstmt.close();
@@ -66,7 +66,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ADMIN_MEMBER_DETAIL</title>
+    <title>관리자용 회원 상세</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -91,11 +91,10 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="common.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../layout_sub.css">
 	<style>
-	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
-	.join_tit{ margin-left:120px; }
 	.vs { height:500px; }
 	.page_title {text-align: center; font-size: 48px; padding-top: 50px; }
 	#page1 .page_wrap { width: 800px; }
@@ -111,6 +110,7 @@
     .vs { height:auto; }
     .title {line-height:10vh; }
     .page { height: 80vh; }
+    .page_wrap table{ margin-left:500px; }
 	</style>
 </head>
 <body>
@@ -124,44 +124,45 @@
 						<tbody>
 							<tr>
 								<th>아이디</th>
-								<td><%=admid %></td>
+								<td><%=admdid %></td>
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><%=admpw %></td>
+								<td><%=admdpw %></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td><%=admname %></td>
+								<td><%=admdname %></td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
-								<td><%=admtel %></td>
+								<td><%=admdtel %></td>
 							</tr>
 							<tr>
 								<th>생년월일(yyyymmdd)</th>
-								<td><%=admborn %></td>
+								<td><%=admdborn %></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td><%=admemail %></td>
+								<td><%=admdemail %></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><%=admaddr %></td>
+								<td><%=admdaddr %></td>
 							</tr>
 							<tr>
 								<th>포인트</th>
-								<td><%=admpoint %></td>
+								<td><%=admdpoint %></td>
 							</tr>
 							<tr>
 								<th>가입일</th>
-								<td><%=admregdate %></td>
+								<td><%=admdregdate %></td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<a href="admin_member_modify.jsp?id=<%=admid %>" class="btn btn-primary">정보수정</a>
-									<a href="admin_member_del_pro.jsp?id=<%=admid %>" class="btn btn-cancel">회원탈퇴</a>
+									<a href="admin_member_modify.jsp?id=<%=admdid %>" class="btn btn-primary">정보수정</a>
+									<a href="admin_member_del_pro.jsp?id=<%=admdid %>" class="btn btn-cancel">회원탈퇴</a>
+									<a href="admin_member_manage.jsp" class="btn btn-primary">회원목록</a>
 								</td>
 							</tr>
 						</tbody>

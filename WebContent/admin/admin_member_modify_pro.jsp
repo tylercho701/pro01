@@ -17,6 +17,7 @@
 	int admmfpborn = Integer.parseInt(request.getParameter("born"));
 	String admmfpaddr = request.getParameter("addr");
 	String admmfpemail = request.getParameter("email");
+	int admmfppoint = Integer.parseInt(request.getParameter("point"));
 		
 	Connection conn = null;
 	PreparedStatement pstmt = null;

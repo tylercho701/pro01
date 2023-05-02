@@ -3,14 +3,14 @@
     pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
 <%
-	String path_adv = request.getContextPath();
+	String path_upd = request.getContextPath();
 	
 	request.setCharacterEncoding("UTF-8");
 	response.setContentType("text/html; charset=UTF-8");
 
-	String aid = "";
+	String uid = "";
 	if(session.getAttribute("id")!=null){
-		aid = (String) session.getAttribute("id");
+		uid = (String) session.getAttribute("id");
 	}
 %>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>관리자용_회원 목록</title>
+    <title>관리자용_공지_수정</title>
 
     <!-- 검색 엔진 초기화 -->
     <meta name="subject">
@@ -45,9 +45,8 @@
 
     <!-- 스타일 초기화 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=path_adv %>/common.css">
-    <link rel="stylesheet" href="<%=path_adv %>/main.css">
-    <link rel="stylesheet" href="<%=path_adv %>/layout_sub.css">
+    <link rel="stylesheet" href="<%=path_upd %>/common.css">
+    <link rel="stylesheet" href="<%=path_upd %>/main.css">
 	<style>
 	.join_content{ clear:both; display:block; width:800px; padding-left:700px; }
 	.join_tit{ margin-left:120px; }
@@ -65,29 +64,19 @@
     .page_tit { text-align:center; font-size:32px; }
     .vs { height:auto; }
     .title {line-height:10vh; }
-    .page { height: 50vh; }
+    .page { height: 80vh; }
 	</style>
 </head>
 <body>
     <div class="container">
 <%@ include file="./admin_hd.jsp" %>
         <div class="content">
-            <figure class="vs">
-                <div class="img_box">
-                </div>
-            </figure>
-			<section class="page" id="page1">
-				<h2 class="page_title">회원목록</h2>
+		     <section class="page" id="page1">
+				<h2 class="page_title">공지사항 수정</h2>
 				<div class="page_wrap">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>member_ID</th><th>member_name</th><th>member_tel</th>
-								<th>member_birth</th><th>member_addr</th><th>member_email</th>
-								<th>member_regdate</th><th>member_point</th>
-							</tr>
-						</thead>
-						<tbody>
+					<form name="admin_update_form" action="admin_boardUpdate_pro.jsp" method="post">
+						<table class="table">
+							<tbody>
 <%
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost/pro01";
@@ -99,46 +88,28 @@
 	ResultSet rs = null;
 	String sql = "";
 	
+	int ubnum = Integer.parseInt(request.getParameter("bnum"));
+	String ubtit = "";
+	String ubbod = "";
+	String uwtnb = "";
+	String uwtna = "";
+	
 	try {
 		Class.forName(driver);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
-			sql = "select * from member";
+			sql = "select a.bnum as bnum, a.btitle as title, a.bbody as bbody, a.written_at as written_at, b.mname as written_by from board a inner join member b on a.written_by = b.id where bnum = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
-				rs = pstmt.executeQuery();	
-				while(rs.next()){
-%>
-							<tr>
-								<td><%=rs.getString("id") %></td>
-								<td>
-<%
-	if(aid!=""){
-%>
-								<a href="<%=path_adv %>/admin/admin_member_detail.jsp?id=<%=rs.getString("id") %>"><%=rs.getString("mname") %></a>
-								</td>
-<%
-} 
-%>
-								<td><%=rs.getString("mtel") %></td>
-								<td><%=Integer.parseInt(rs.getString("mborn")) %></td>
-								<td><%=rs.getString("maddr") %></td>
-								<td><%=rs.getString("memail") %></td>
-								<td><%=rs.getString("regdate") %></td>
-								<td><%=Integer.parseInt(rs.getString("point")) %></td>
-							</tr>
-						</tbody>
-<%
-				}
-%>
-					</table>
-				</div>
-			</section>
-		</div>
-<%@ include file="../ft.jsp" %> 
-	</div>
-</body>
-<%
+				pstmt.setInt(1, ubnum);
+				rs = pstmt.executeQuery();		
+					while(rs.next()){
+						ubnum = rs.getInt("bnum");
+						ubtit = rs.getString("title");
+						ubbod = rs.getString("bbody");
+						uwtnb = rs.getString("written_by");
+						uwtna = rs.getString("written_at");
+					}
 				rs.close();
 				pstmt.close();
 				conn.close();
@@ -152,6 +123,42 @@
 	System.out.println("driver 로드 실패");
 	}
 %>
+								<tr>
+									<th><label for="bnum" class="lb">Board_Num</label></th>
+									<td><input type="text" name="bnum" id="bnum" value="<%=ubnum %>" readonly></td>
+								</tr>
+								<tr>
+									<th><label for="btit" class="lb">Title</label></th>
+									<td><input type="text" name="btit" id="btit" value="<%=ubtit %>" required></td>
+								</tr>
+								<tr>
+									<th><label for="bbody" class="lb">Content</label></th>
+									<td>
+										<textarea name="bbody" id="bbody" cols=30 rows=5><%=ubbod %></textarea>
+										<input type="hidden" id="uid" value="<%=uid %>">
+									</td>
+								</tr>
+								<tr>
+									<th><label for="wtnb" class="lb">Written_By</label></th>
+									<td><input type="text" name="wtnb" id="wtnb" value="<%=uwtnb %>" readonly></td>
+								</tr>
+								<tr>
+									<th><label for="wtna" class="lb">Written_At</label></th>
+									<td><input type="text" name="wtna" id="wtna" value="<%=uwtna %>" readonly></td>
+								</tr>
+								<tr>
+									<td><input type="submit" value="정보수정" class="btn btn-primary"></td>
+									<td><input type="reset" value="취소" class="btn btn-cancel"></td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</section>
+		</div>
+<%@ include file="../ft.jsp" %> 
+	</div>
+</body>
 <!-- 
 <h1>농심</h1>
 <a href="https://tylercho701.github.io">메인</a> 
